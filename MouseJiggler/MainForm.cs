@@ -1,6 +1,6 @@
 ﻿#region header
 
-// MouseJiggler - MainForm.cs
+// CoffeeWizz - MainForm.cs
 // 
 // Created by: Alistair J R Young (avatar) at 2021/01/24 1:57 AM.
 
@@ -11,134 +11,120 @@
 using System;
 using System.Windows.Forms;
 
-using ArkaneSystems.MouseJiggler.Properties;
+using Xcy7e.CoffeeWizz.Properties;
 
 #endregion
 
-namespace ArkaneSystems.MouseJiggler
+namespace Xcy7e.CoffeeWizz
 {
     public partial class MainForm : Form
     {
         /// <summary>
         ///     Constructor for use by the form designer.
         /// </summary>
-        public MainForm ()
-            : this (jiggleOnStartup: false, minimizeOnStartup: false, zenJiggleEnabled: false, jigglePeriod: 1)
+        public MainForm()
+            : this(wizzleOnStartup: false, minimizeOnStartup: false, zenWizzleEnabled: false, wizzlePeriod: 1)
         { }
 
-        public MainForm (bool jiggleOnStartup, bool minimizeOnStartup, bool zenJiggleEnabled, int jigglePeriod)
+        public MainForm(bool wizzleOnStartup, bool minimizeOnStartup, bool zenWizzleEnabled, int wizzlePeriod)
         {
-            this.InitializeComponent ();
+            this.InitializeComponent();
 
-            // Jiggling on startup?
-            this.JiggleOnStartup = jiggleOnStartup;
+            // Wizzling on startup?
+            this.WizzleOnStartup = wizzleOnStartup;
 
             // Set settings properties
             // We do this by setting the controls, and letting them set the properties.
 
             this.cbMinimize.Checked = minimizeOnStartup;
-            this.cbZen.Checked      = zenJiggleEnabled;
-            this.tbPeriod.Value     = jigglePeriod;
+            this.cbZen.Checked = zenWizzleEnabled;
+            this.tbPeriod.Value = wizzlePeriod;
         }
 
-        public bool JiggleOnStartup { get; }
+        public bool WizzleOnStartup { get; }
 
-        private void MainForm_Load (object sender, EventArgs e)
+        private void MainForm_Load(object sender, EventArgs e)
         {
-            if (this.JiggleOnStartup)
-                this.cbJiggling.Checked = true;
+            if (this.WizzleOnStartup)
+                this.cbWizzling.Checked = true;
         }
 
-        private void UpdateNotificationAreaText ()
+        private void cmdAbout_Click(object sender, EventArgs e)
         {
-            if (!this.cbJiggling.Checked)
-            {
-                this.niTray.Text = "Not jiggling the mouse.";
-            }
-            else
-            {
-                string? ww = this.ZenJiggleEnabled ? "with" : "without";
-                this.niTray.Text = $"Jiggling mouse every {this.JigglePeriod} s, {ww} Zen.";
-            }
-        }
-
-        private void cmdAbout_Click (object sender, EventArgs e)
-        {
-            new AboutBox ().ShowDialog (owner: this);
+            new AboutBox().ShowDialog(owner: this);
         }
 
         #region Property synchronization
 
-        private void cbSettings_CheckedChanged (object sender, EventArgs e)
+        private void cbSettings_CheckedChanged(object sender, EventArgs e)
         {
             this.panelSettings.Visible = this.cbSettings.Checked;
         }
 
-        private void cbMinimize_CheckedChanged (object sender, EventArgs e)
+        private void cbMinimize_CheckedChanged(object sender, EventArgs e)
         {
             this.MinimizeOnStartup = this.cbMinimize.Checked;
         }
 
-        private void cbZen_CheckedChanged (object sender, EventArgs e)
+        private void cbZen_CheckedChanged(object sender, EventArgs e)
         {
-            this.ZenJiggleEnabled = this.cbZen.Checked;
+            this.ZenWizzleEnabled = this.cbZen.Checked;
         }
 
-        private void tbPeriod_ValueChanged (object sender, EventArgs e)
+        private void tbPeriod_ValueChanged(object sender, EventArgs e)
         {
-            this.JigglePeriod = this.tbPeriod.Value;
+            this.WizzlePeriod = this.tbPeriod.Value;
         }
 
         #endregion Property synchronization
 
-        #region Do the Jiggle!
+        #region Do the Wizzle!
 
         protected bool Zig = true;
 
-        private void cbJiggling_CheckedChanged (object sender, EventArgs e)
+        private void cbWizzling_CheckedChanged(object sender, EventArgs e)
         {
-            this.jiggleTimer.Enabled = this.cbJiggling.Checked;
+            this.wizzleTimer.Enabled = this.cbWizzling.Checked;
         }
 
-        private void jiggleTimer_Tick (object sender, EventArgs e)
+        private void wizzleTimer_Tick(object sender, EventArgs e)
         {
-            if (this.ZenJiggleEnabled)
-                Helpers.Jiggle (delta: 0);
+            if (this.ZenWizzleEnabled)
+                Helpers.Wizzle(delta: 0);
             else if (this.Zig)
-                Helpers.Jiggle (delta: 4);
+                Helpers.Wizzle(delta: 4);
             else //zag
-                Helpers.Jiggle (delta: -4);
+                Helpers.Wizzle(delta: -4);
 
             this.Zig = !this.Zig;
         }
 
-        #endregion Do the Jiggle!
+        #endregion Do the Wizzle!
 
         #region Minimize and restore
 
-        private void cmdTrayify_Click (object sender, EventArgs e)
+        private void cmdTrayify_Click(object sender, EventArgs e)
         {
-            this.MinimizeToTray ();
+            this.MinimizeToTray();
         }
 
-        private void niTray_DoubleClick (object sender, EventArgs e)
+        private void niTray_DoubleClick(object sender, EventArgs e)
         {
-            this.RestoreFromTray ();
+            this.RestoreFromTray();
         }
 
-        private void MinimizeToTray ()
+        private void MinimizeToTray()
         {
-            this.Visible        = false;
-            this.ShowInTaskbar  = false;
+            this.Visible = false;
+            this.ShowInTaskbar = false;
             this.niTray.Visible = true;
-
-            this.UpdateNotificationAreaText ();
         }
 
-        private void RestoreFromTray ()
+        private void RestoreFromTray()
         {
-            this.Visible        = true;
-            this.ShowInTaskbar  = true;
+            this.WindowState = FormWindowState.Minimized;
+            this.Visible = true;
+            this.ShowInTaskbar = true;
             this.niTray.Visible = false;
         }
 
@@ -146,11 +132,11 @@ namespace ArkaneSystems.MouseJiggler
 
         #region Settings property backing fields
 
-        private int jigglePeriod;
+        private int wizzlePeriod;
 
         private bool minimizeOnStartup;
 
-        private bool zenJiggleEnabled;
+        private bool zenWizzleEnabled;
 
         #endregion Settings property backing fields
 
@@ -161,34 +147,34 @@ namespace ArkaneSystems.MouseJiggler
             get => this.minimizeOnStartup;
             set
             {
-                this.minimizeOnStartup             = value;
+                this.minimizeOnStartup = value;
                 Settings.Default.MinimizeOnStartup = value;
-                Settings.Default.Save ();
+                Settings.Default.Save();
             }
         }
 
-        public bool ZenJiggleEnabled
+        public bool ZenWizzleEnabled
         {
-            get => this.zenJiggleEnabled;
+            get => this.zenWizzleEnabled;
             set
             {
-                this.zenJiggleEnabled      = value;
-                Settings.Default.ZenJiggle = value;
-                Settings.Default.Save ();
+                this.zenWizzleEnabled = value;
+                Settings.Default.ZenWizzle = value;
+                Settings.Default.Save();
             }
         }
 
-        public int JigglePeriod
+        public int WizzlePeriod
         {
-            get => this.jigglePeriod;
+            get => this.wizzlePeriod;
             set
             {
-                this.jigglePeriod             = value;
-                Settings.Default.JigglePeriod = value;
-                Settings.Default.Save ();
+                this.wizzlePeriod = value;
+                Settings.Default.WizzlePeriod = value;
+                Settings.Default.Save();
 
-                this.jiggleTimer.Interval = value * 1000;
-                this.lbPeriod.Text        = $"{value} s";
+                this.wizzleTimer.Interval = value * 1000;
+                this.lbPeriod.Text = $"{value} s";
             }
         }
 
@@ -198,14 +184,14 @@ namespace ArkaneSystems.MouseJiggler
 
         private bool firstShown = true;
 
-        private void MainForm_Shown (object sender, EventArgs e)
+        private void MainForm_Shown(object sender, EventArgs e)
         {
             if (this.firstShown && this.MinimizeOnStartup)
-                this.MinimizeToTray ();
+                this.MinimizeToTray();
 
             this.firstShown = false;
         }
 
-        #endregion
+#endregion
     }
 }

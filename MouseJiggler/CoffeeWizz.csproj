@@ -4,30 +4,40 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net7.0-windows</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
-    <RootNamespace>ArkaneSystems.MouseJiggler</RootNamespace>
+    <RootNamespace>Xcy7e.CoffeeWizz</RootNamespace>
     <Nullable>enable</Nullable>
     <ApplicationIcon>Mouse (ISO).ico</ApplicationIcon>
-    <Version>2.0.14</Version>
+    <Version>1.0</Version>
     <PublishSingleFile>true</PublishSingleFile>
     <SelfContained>false</SelfContained>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
-    <Authors>Alistair J. R. Young</Authors>
-    <Company>Arkane Systems</Company>
-    <Description>A utility to continuously jiggle the mouse pointer to prevent screen saver activation.
-
-Tick the 'Jiggling?' checkbox to begin jiggling the mouse; untick it to stop. The 'Zen jiggle?' checkbox (under "Settings...") enables a mode in which the pointer is jiggled 'virtually' - the system believes it to be moving and thus screen saver activation, etc., is prevented, but the pointer does not actually move. This may not work for idle detection under all applications.</Description>
-    <Copyright>Copyright © Alistair J. R. Young 2007-2021</Copyright>
+    <Authors>xcy7e</Authors>
+    <Company></Company>
+    <Description>A Fork of the awesome MJ. by Alistair.
+https://t.ly/Z1gd8</Description>
+    <Copyright>Copyright © xcy7e 2024</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/cerebrate/mousejiggler</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/xcy7e/coffeewizz</PackageProjectUrl>
     <NeutralLanguage>en-US</NeutralLanguage>
-    <AssemblyVersion>2.0.14.0</AssemblyVersion>
-    <FileVersion>2.0.14.0</FileVersion>
+    <AssemblyVersion>1.0</AssemblyVersion>
+    <FileVersion>1.0</FileVersion>
+    <RepositoryUrl>https://github.com/arkane-systems/mousewizzler</RepositoryUrl>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <Title>CoffeeWizz</Title>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="2022.3.1" />
@@ -57,6 +67,10 @@ Tick the 'Jiggling?' checkbox to begin jiggling the mouse; untick it to stop. Th
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="icon.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
     <None Update="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

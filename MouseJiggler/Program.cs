@@ -1,8 +1,9 @@
 #region header
 
-// MouseJiggler - Program.cs
+// CoffeeWizz - Program.cs
 // 
 // Created by: Alistair J R Young (avatar) at 2021/01/22 4:12 PM.
+// Forked by: xcy7e, Oct 2024
 
 #endregion
 
@@ -15,7 +16,7 @@ using System.CommandLine.Parsing;
 using System.Threading;
 using System.Windows.Forms;
 
-using ArkaneSystems.MouseJiggler.Properties;
+using Xcy7e.CoffeeWizz.Properties;
 
 using JetBrains.Annotations;
 
@@ -23,7 +24,7 @@ using PInvoke;
 
 #endregion
 
-namespace ArkaneSystems.MouseJiggler
+namespace Xcy7e.CoffeeWizz
 {
     [PublicAPI]
     public static class Program
@@ -37,8 +38,8 @@ namespace ArkaneSystems.MouseJiggler
             // Attach to the parent process's console so we can display help, version information, and command-line errors.
             Kernel32.AttachConsole (dwProcessId: Helpers.AttachParentProcess);
 
-            // Ensure that we are the only instance of the Mouse Jiggler currently running.
-            var instance = new Mutex (initiallyOwned: false, name: "single instance: ArkaneSystems.MouseJiggler");
+            // Ensure that we are the only instance of the Mouse Wizzler currently running.
+            var instance = new Mutex (initiallyOwned: false, name: "single instance: Xcy7e.CoffeeWizz");
 
             try
             {
@@ -50,7 +51,7 @@ namespace ArkaneSystems.MouseJiggler
                 }
                 else
                 {
-                    Console.WriteLine (value: "Mouse Jiggler is already running. Aborting.");
+                    Console.WriteLine (value: "CoffeeWizz is already running. Aborting.");
 
                     return 1;
                 }
@@ -64,7 +65,7 @@ namespace ArkaneSystems.MouseJiggler
             }
         }
 
-        private static int RootHandler (bool jiggle, bool minimized, bool zen, int seconds)
+        private static int RootHandler (bool wizzle, bool minimized, bool zen, int seconds)
         {
             // Prepare Windows Forms to run the application.
             Application.SetHighDpiMode (highDpiMode: HighDpiMode.SystemAware);
@@ -72,10 +73,10 @@ namespace ArkaneSystems.MouseJiggler
             Application.SetCompatibleTextRenderingDefault (defaultValue: false);
 
             // Run the application.
-            var mainForm = new MainForm (jiggleOnStartup: jiggle,
+            var mainForm = new MainForm (wizzleOnStartup: wizzle,
                                          minimizeOnStartup: minimized,
-                                         zenJiggleEnabled: zen,
-                                         jigglePeriod: seconds);
+                                         zenWizzleEnabled: zen,
+                                         wizzlePeriod: seconds);
 
             Application.Run (mainForm: mainForm);
 
@@ -87,16 +88,16 @@ namespace ArkaneSystems.MouseJiggler
             // Create root command.
             var rootCommand = new RootCommand
                               {
-                                  Description = "Virtually jiggles the mouse, making the computer seem not idle.",
+                                  Description = "Virtually wizzles the mouse, making the computer seem not idle.",
                                   Handler =
                                       CommandHandler.Create (action: new Func<bool, bool, bool, int, int> (Program.RootHandler)),
                               };
 
-            // -j --jiggle
-            Option optJiggling = new (aliases: new[] {"--jiggle", "-j",}, description: "Start with jiggling enabled.");
-            optJiggling.Argument = new Argument<bool> ();
-            optJiggling.Argument.SetDefaultValue (value: false);
-            rootCommand.AddOption (option: optJiggling);
+            // -j --wizzle
+            Option optWizzling = new (aliases: new[] {"--wizzle", "-j",}, description: "Start with wizzling enabled.");
+            optWizzling.Argument = new Argument<bool> ();
+            optWizzling.Argument.SetDefaultValue (value: false);
+            rootCommand.AddOption (option: optWizzling);
 
             // -m --minimized
             Option optMinimized = new (aliases: new[] {"--minimized", "-m",}, description: "Start minimized.");
@@ -105,14 +106,14 @@ namespace ArkaneSystems.MouseJiggler
             rootCommand.AddOption (option: optMinimized);
 
             // -z --zen
-            Option optZen = new (aliases: new[] {"--zen", "-z",}, description: "Start with zen (invisible) jiggling enabled.");
+            Option optZen = new (aliases: new[] {"--zen", "-z",}, description: "Start with zen (invisible) wizzling enabled.");
             optZen.Argument = new Argument<bool> ();
-            optZen.Argument.SetDefaultValue (value: Settings.Default.ZenJiggle);
+            optZen.Argument.SetDefaultValue (value: Settings.Default.ZenWizzle);
             rootCommand.AddOption (option: optZen);
 
             // -s 60 --seconds=60
             Option optPeriod = new (aliases: new[] {"--seconds", "-s",},
-                                    description: "Set number of seconds for the jiggle interval.");
+                                    description: "Set number of seconds for the wizzle interval.");
 
             optPeriod.Argument = new Argument<int> ();
 
@@ -124,7 +125,7 @@ namespace ArkaneSystems.MouseJiggler
                                                        ? "Period cannot be longer than 60 seconds."
                                                        : null);
 
-            optPeriod.Argument.SetDefaultValue (value: Settings.Default.JigglePeriod);
+            optPeriod.Argument.SetDefaultValue (value: Settings.Default.WizzlePeriod);
             rootCommand.AddOption (option: optPeriod);
 
             // Build the command line parser.

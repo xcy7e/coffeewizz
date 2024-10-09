@@ -1,5 +1,5 @@
 ﻿
-namespace ArkaneSystems.MouseJiggler
+namespace Xcy7e.CoffeeWizz
 {
     sealed partial class AboutBox
     {

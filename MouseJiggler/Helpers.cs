@@ -1,6 +1,6 @@
 ﻿#region header
 
-// MouseJiggler - Helpers.cs
+// CoffeeWizz - Helpers.cs
 // 
 // Created by: Alistair J R Young (avatar) at 2021/01/20 7:40 PM.
 
@@ -16,7 +16,7 @@ using PInvoke;
 
 #endregion
 
-namespace ArkaneSystems.MouseJiggler
+namespace Xcy7e.CoffeeWizz
 {
     internal static class Helpers
     {
@@ -29,13 +29,13 @@ namespace ArkaneSystems.MouseJiggler
 
         #endregion Console management
 
-        #region Jiggling
+        #region Wizzling
 
         /// <summary>
-        ///     Jiggle the mouse; i.e., fake a mouse movement event.
+        ///     Wizzle the mouse; i.e., fake a mouse movement event.
         /// </summary>
         /// <param name="delta">The mouse will be moved by delta pixels along both X and Y.</param>
-        internal static void Jiggle (int delta)
+        internal static void Wizzle (int delta)
         {
             var inp = new User32.INPUT
                       {
@@ -61,12 +61,12 @@ namespace ArkaneSystems.MouseJiggler
                 int errorCode = Marshal.GetLastWin32Error ();
 
                 Debugger.Log (level: 1,
-                              category: "Jiggle",
+                              category: "Wizzle",
                               message:
                               $"failed to insert event to input stream; retval={returnValue}, errcode=0x{errorCode:x8}\n");
             }
         }
 
-        #endregion Jiggling
+        #endregion Wizzling
     }
 }

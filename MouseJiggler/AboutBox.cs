@@ -1,6 +1,6 @@
 ﻿#region header
 
-// MouseJiggler - AboutBox.cs
+// CoffeeWizz - AboutBox.cs
 // 
 // Created by: Alistair J R Young (avatar) at 2021/01/22 2:24 PM.
 
@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 #endregion
 
-namespace ArkaneSystems.MouseJiggler
+namespace Xcy7e.CoffeeWizz
 {
     public sealed partial class AboutBox : Form
     {
