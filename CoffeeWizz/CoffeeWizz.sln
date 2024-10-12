@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "..\Setup\Setup.vdproj", "{7231A269-D792-46BD-AE31-CD5E824373FA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{C5CC87B3-C8D5-474B-A97A-2B6B1316FD5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5CC87B3-C8D5-474B-A97A-2B6B1316FD5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5CC87B3-C8D5-474B-A97A-2B6B1316FD5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7231A269-D792-46BD-AE31-CD5E824373FA}.Debug|Any CPU.ActiveCfg = Debug
+		{7231A269-D792-46BD-AE31-CD5E824373FA}.Debug|Any CPU.Build.0 = Debug
+		{7231A269-D792-46BD-AE31-CD5E824373FA}.Release|Any CPU.ActiveCfg = Release
+		{7231A269-D792-46BD-AE31-CD5E824373FA}.Release|Any CPU.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

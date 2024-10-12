@@ -13,8 +13,7 @@
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     <Authors>xcy7e</Authors>
     <Company></Company>
-    <Description>A Fork of the awesome MJ. by Alistair.
-https://t.ly/Z1gd8</Description>
+    <Description>A Fork of the awesome MouseJiggler by Alistair. For a full list of changes see https://github.com/xcy7e/coffeewizz.</Description>
     <Copyright>Copyright © xcy7e 2024</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/xcy7e/coffeewizz</PackageProjectUrl>
@@ -25,6 +24,10 @@ https://t.ly/Z1gd8</Description>
     <PackageIcon>icon.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <Title>CoffeeWizz</Title>
+    <StartupObject>Xcy7e.CoffeeWizz.Program</StartupObject>
+    <PlatformTarget>x64</PlatformTarget>
+    <SignAssembly>False</SignAssembly>
+    <IncludeSymbols>False</IncludeSymbols>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
