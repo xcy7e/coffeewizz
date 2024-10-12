@@ -12,7 +12,10 @@ old/
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
+!/[cC]offeeWizz/bin/[rR]elease
+
 [Rr]elease/
+
 x64/
 build/
 bld/
@@ -180,3 +183,6 @@ FakesAssemblies/
 
 /.github
 .github
+
+
+/Setup/Release
